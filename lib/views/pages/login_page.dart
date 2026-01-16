@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/views/widgets/hero_widget.dart';
 import 'package:flutter_app/views/widget_tree.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.title});
@@ -35,48 +35,52 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              HeroWidget(title: widget.title),
-              SizedBox(height: 20.0),
-              TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
+          child: LayoutBuilder(
+            builder: (context, BoxConstraints constraints) {
+              return FractionallySizedBox(
+                widthFactor: constraints.maxWidth > 600 ? 0.5 : 1.0,
+                child: Column(
+                  children: [
+                    Lottie.asset(
+                      'assets/lotties/welcome.json',
+                      width: double.infinity,
+                      height: 300.0,
+                    ),
+                    SizedBox(height: 20.0),
+                    TextField(
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    TextField(
+                      obscureText: true,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    FilledButton(
+                      onPressed: () {
+                        onLoginPressed();
+                      },
+                      style: FilledButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40.0),
+                      ),
+                      child: Text(widget.title),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(height: 20.0),
-              TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  onLoginPressed();
-                },
-                style: FilledButton.styleFrom(
-                  minimumSize: Size(double.infinity, 40.0),
-                ),
-                child: Text('Login'),
-              ),
-              TextButton(
-                style: FilledButton.styleFrom(
-                  minimumSize: Size(double.infinity, 40.0),
-                ),
-                onPressed: () {},
-                child: Text('Register'),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),

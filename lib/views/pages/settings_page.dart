@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_app/views/pages/expanded_flexible_test.dart';
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key, required this.title});
   final String title;
@@ -62,9 +62,12 @@ class _SettingsPageState extends State<SettingsPage> {
                         title: Text('Dialog Title'),
                         content: Text('Dialog Content'),
                         actions: [
-                          FilledButton(onPressed: () {
-                            Navigator.pop(context);
-                          }, child: Text('Close')),
+                          FilledButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Close'),
+                          ),
                         ],
                       );
                     },
@@ -144,6 +147,17 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text('Save'),
                 ),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ExpandedFlexibleTestPage(),
+                    ),
+                  );
+                },
+                child: Text('Show Flexible and Expanded'),
               ),
             ],
           ),
